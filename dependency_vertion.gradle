@@ -1,0 +1,44 @@
+ext {
+    android_core_ktx_vertion = '1.9.0'
+    androidx_appcompat_vertion = '1.6.1'
+    material_vertion = '1.8.0'
+    constraintlayout_vertion = '2.1.4'
+    fragment_ktx_vertion = '1.5.5'
+    hilt_vertion = '2.44'
+
+    android_core_ktx = "androidx.core:core-ktx:$android_core_ktx_vertion"
+    androidx_appcompat = "androidx.appcompat:appcompat:$androidx_appcompat_vertion"
+    material = "com.google.android.material:material:$material_vertion"
+    constraintlayout = "androidx.constraintlayout:constraintlayout:$constraintlayout_vertion"
+    fragment_ktx = "androidx.fragment:fragment-ktx:$fragment_ktx_vertion"
+    hilt = "com.google.dagger:hilt-android:$hilt_vertion"
+    hilt_kapt = "com.google.dagger:hilt-android-compiler:$hilt_vertion"
+
+    //Test
+    junit_vertion = '4.13.2'
+    androidx_junit_vertion = '1.1.5'
+    androidx_espresso_core_vertion = '3.5.1'
+
+    junit = "junit:junit:$junit_vertion"
+    androidx_junit = "androidx.test.ext:junit:$androidx_junit_vertion"
+    androidx_espresso_core = "androidx.test.espresso:espresso-core:$androidx_espresso_core_vertion"
+
+    base_dependencies = { module ->
+        module.dependencies {
+            implementation(
+                    android_core_ktx,
+                    hilt,
+                    material
+            )
+
+            kapt hilt_kapt
+
+            testImplementation junit
+
+            androidTestImplementation(
+                    androidx_junit,
+                    androidx_espresso_core
+            )
+        }
+    }
+}
