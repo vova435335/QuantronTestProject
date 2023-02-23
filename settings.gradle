@@ -14,3 +14,7 @@ dependencyResolutionManagement {
 }
 rootProject.name = "QuantronTestProject"
 include ':app'
+include ':core'
+include ':core-api'
+include ':core-impl'
+include ':home'
