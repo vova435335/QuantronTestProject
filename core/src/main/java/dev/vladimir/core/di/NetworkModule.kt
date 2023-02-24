@@ -6,7 +6,7 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import dev.vladimir.core.data.common.BASE_URL
+import dev.vladimir.core.BuildConfig
 import dev.vladimir.core.data.interceptor.ApiKeyInterceptor
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
@@ -32,7 +32,7 @@ class NetworkModule {
     @Singleton
     @Provides
     fun provideRetrofit(gson: Gson, okHttpClient: OkHttpClient): Retrofit = Retrofit.Builder()
-        .baseUrl(BASE_URL)
+        .baseUrl(BuildConfig.BASE_URL)
         .addConverterFactory(GsonConverterFactory.create(gson))
         .client(okHttpClient)
         .build()
