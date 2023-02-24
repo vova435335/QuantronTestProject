@@ -15,6 +15,6 @@ class PopularMovieMapper @Inject constructor() {
         Movie(
             id = movieResponse.id,
             title = movieResponse.title,
-            posterPath = BuildConfig.POSTER_BASE_URL
+            posterPath = BuildConfig.POSTER_BASE_URL + movieResponse.posterPath
         )
 }
