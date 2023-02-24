@@ -2,16 +2,15 @@ ext {
     applyAndroidConfiguration = { module ->
         module.configure(module) {
 
-            apply plugin: 'com.android.application'
+            apply plugin: 'com.android.library'
             apply plugin: 'org.jetbrains.kotlin.android'
             apply plugin: 'kotlin-kapt'
+            apply plugin: 'com.google.dagger.hilt.android'
 
             android {
-                namespace 'dev.vladimir.quantrontestproject'
                 compileSdk 33
 
                 defaultConfig {
-                    applicationId "dev.vladimir.quantrontestproject"
                     minSdk 22
                     targetSdk 33
                     versionCode 1
