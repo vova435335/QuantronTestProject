@@ -1,10 +1,20 @@
 applyAndroidConfiguration(this)
 base_dependencies(this)
 
+android {
+    defaultConfig {
+        buildConfigField "String", "POSTER_BASE_URL", "\"https://image.tmdb.org/t/p/w500\""
+    }
+}
+
 dependencies {
     implementation(
             fragment_ktx,
-            androidx_paging
+            androidx_paging,
+            glide,
     )
+
+    kapt glide_kapt
+
     implementation project(':core')
 }

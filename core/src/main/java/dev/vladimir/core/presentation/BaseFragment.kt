@@ -1,4 +1,4 @@
-package dev.vladimir.quantrontestproject.presentation
+package dev.vladimir.core.presentation
 
 import android.os.Bundle
 import android.view.LayoutInflater

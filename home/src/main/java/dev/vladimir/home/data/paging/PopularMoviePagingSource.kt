@@ -16,20 +16,18 @@ class PopularMoviePagingSource(
     }
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Movie> {
-        val page = params.key ?: 0
+        val page = params.key ?: 1
 
         return try {
             val movies = loader.invoke(page)
 
             return LoadResult.Page(
                 data = movies,
-                prevKey = if(page == 0) null else page - 1,
+                prevKey = if(page == 1) null else page - 1,
                 nextKey = if(movies.size < params.loadSize) null else page + 1
             )
         } catch (e: Exception) {
             LoadResult.Error(throwable = e)
         }
     }
-
-
 }
