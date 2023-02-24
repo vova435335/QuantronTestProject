@@ -1,0 +1,17 @@
+applyAndroidConfiguration(this)
+base_dependencies(this)
+
+android {
+    defaultConfig {
+        buildConfigField "String", "API_KEY", "\"02b113b496621e5a49428c55c55a3ccc\""
+        buildConfigField "String", "BASE_URL", "\"https://api.themoviedb.org/3/\""
+    }
+}
+
+dependencies {
+    api(
+            retrofit,
+            retrofit_gson_converter,
+            gson
+    )
+}

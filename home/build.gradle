@@ -1,0 +1,7 @@
+applyAndroidConfiguration(this)
+base_dependencies(this)
+
+dependencies {
+    implementation fragment_ktx
+    implementation project(':core')
+}
