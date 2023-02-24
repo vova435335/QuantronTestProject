@@ -2,6 +2,6 @@ applyAndroidConfiguration(this)
 base_dependencies(this)
 
 dependencies {
+    implementation fragment_ktx
     implementation project(':core')
-    implementation 'androidx.fragment:fragment-ktx:1.5.5'
 }

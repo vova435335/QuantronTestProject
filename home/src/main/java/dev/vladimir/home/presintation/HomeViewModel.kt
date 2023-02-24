@@ -15,7 +15,6 @@ class HomeViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
-            Log.d("qqq", "${homeRepository.getPopularMovies()}")
         }
     }
 }
