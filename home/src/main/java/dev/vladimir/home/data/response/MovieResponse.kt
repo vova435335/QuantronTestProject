@@ -2,7 +2,7 @@ package dev.vladimir.home.data.response
 
 import com.google.gson.annotations.SerializedName
 
-data class Movie(
+data class MovieResponse(
     @SerializedName("poster_path") val posterPath: String?,
     @SerializedName("adult") val adult: Boolean,
     @SerializedName("overview") val overview: String,

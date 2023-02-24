@@ -1,8 +1,8 @@
 package dev.vladimir.home.domain.repository
 
-import dev.vladimir.home.data.response.PopularMovieResponseModel
+import dev.vladimir.home.domain.model.Movie
 
 interface IHomeRepository {
 
-    suspend fun getPopularMovies(): PopularMovieResponseModel
+    suspend fun getPopularMovies(): List<Movie>
 }
