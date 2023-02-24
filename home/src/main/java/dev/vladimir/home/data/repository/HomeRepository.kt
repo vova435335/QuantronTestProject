@@ -12,8 +12,8 @@ class HomeRepository @Inject constructor(
     private val popularMovieMapper: PopularMovieMapper
 ) : IHomeRepository {
 
-    override suspend fun getPopularMovies() =
+    override suspend fun getPopularMovies(page: Int) =
         withContext(Dispatchers.IO) {
-            popularMovieMapper.mupMovies(movieApi.getPopularMovies())
+            popularMovieMapper.mupMovies(movieApi.getPopularMovies(page = page))
         }
 }

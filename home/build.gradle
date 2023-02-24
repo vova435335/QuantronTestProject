@@ -2,6 +2,9 @@ applyAndroidConfiguration(this)
 base_dependencies(this)
 
 dependencies {
-    implementation fragment_ktx
+    implementation(
+            fragment_ktx,
+            androidx_paging
+    )
     implementation project(':core')
 }

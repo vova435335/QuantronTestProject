@@ -4,5 +4,5 @@ import dev.vladimir.home.domain.model.Movie
 
 interface IHomeRepository {
 
-    suspend fun getPopularMovies(): List<Movie>
+    suspend fun getPopularMovies(page: Int): List<Movie>
 }
