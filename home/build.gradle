@@ -3,4 +3,5 @@ base_dependencies(this)
 
 dependencies {
     implementation project(':core')
+    implementation 'androidx.fragment:fragment-ktx:1.5.5'
 }

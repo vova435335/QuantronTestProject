@@ -7,6 +7,7 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import dev.vladimir.core.data.common.BASE_URL
+import dev.vladimir.core.data.interceptor.ApiKeyInterceptor
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -25,7 +26,7 @@ class NetworkModule {
     @Singleton
     @Provides
     fun provideOkHttpClient(): OkHttpClient = OkHttpClient.Builder()
-//        .addInterceptor(TokenInterceptor())
+        .addInterceptor(ApiKeyInterceptor())
         .build()
 
     @Singleton
