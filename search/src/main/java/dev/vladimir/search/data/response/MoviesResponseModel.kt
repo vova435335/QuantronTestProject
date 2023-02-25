@@ -1,4 +1,4 @@
-package dev.vladimir.core.data.response
+package dev.vladimir.search.data.response
 
 import com.google.gson.annotations.SerializedName
 

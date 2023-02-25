@@ -3,7 +3,7 @@ package dev.vladimir.search.data
 import dev.vladimir.core.data.common.DEFAULT_LANGUAGE
 import dev.vladimir.core.data.common.LANGUAGE_QUERY_KEY
 import dev.vladimir.core.data.common.PAGE_QUERY_KEY
-import dev.vladimir.core.data.response.MoviesResponseModel
+import dev.vladimir.search.data.response.MoviesResponseModel
 import dev.vladimir.search.data.response.TvResponseModel
 import retrofit2.http.GET
 import retrofit2.http.Query

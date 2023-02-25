@@ -1,8 +1,8 @@
 package dev.vladimir.home.data.mapper
 
 import dev.vladimir.core.BuildConfig
-import dev.vladimir.core.data.response.MovieResponse
-import dev.vladimir.core.data.response.MoviesResponseModel
+import dev.vladimir.home.data.response.MovieResponse
+import dev.vladimir.home.data.response.MoviesResponseModel
 import dev.vladimir.home.domain.model.Movie
 import javax.inject.Inject
 

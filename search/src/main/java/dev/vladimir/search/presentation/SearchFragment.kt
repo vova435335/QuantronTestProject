@@ -1,33 +1,30 @@
 package dev.vladimir.search.presentation
 
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
-import androidx.fragment.app.Fragment
+import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import dev.vladimir.core.data.common.observe
-import dev.vladimir.search.R
+import dev.vladimir.core.presentation.BaseFragment
 import dev.vladimir.search.databinding.FragmentSearchBinding
 
 @AndroidEntryPoint
-class SearchFragment : Fragment(R.layout.fragment_search) {
+class SearchFragment : BaseFragment<FragmentSearchBinding>() {
 
     private val viewModel by viewModels<SearchViewModel>()
 
     private lateinit var searchAdapter: MediaAdapter
 
-//    override fun createBinding(
-//        inflater: LayoutInflater,
-//        container: ViewGroup?,
-//    ): FragmentSearchBinding = FragmentSearchBinding.inflate(inflater, container, false)
-
-    private lateinit var binding: FragmentSearchBinding
+    override fun createBinding(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+    ): FragmentSearchBinding = FragmentSearchBinding.inflate(inflater, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        binding = FragmentSearchBinding.bind(view)
 
         initRecycler()
         observeViewModel()

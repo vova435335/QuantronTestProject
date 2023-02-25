@@ -5,6 +5,8 @@ import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import dev.vladimir.search.data.paging.MediaType
 import dev.vladimir.search.data.paging.SearchMoviesPagingSource
+import dev.vladimir.search.domain.mapper.MediaMapper
+import dev.vladimir.search.domain.model.Media
 import dev.vladimir.search.domain.model.Movie
 import dev.vladimir.search.domain.repository.ISearchRepository
 import kotlinx.coroutines.flow.Flow
@@ -14,9 +16,10 @@ private const val PAGE_SIZE = 20
 
 class SearchInteractor @Inject constructor(
     private val iSearchRepository: ISearchRepository,
+    private val mediaMapper: MediaMapper,
 ) {
 
-    fun getPagingSearchMovies(query: String): Flow<PagingData<Movie>> {
+    fun getPagingSearchMovies(query: String): Flow<PagingData<Media>> {
         return Pager(
             config = PagingConfig(
                 pageSize = PAGE_SIZE,
@@ -27,8 +30,14 @@ class SearchInteractor @Inject constructor(
                 SearchMoviesPagingSource(
                     loader = { page, mediaType ->
                         when (mediaType) {
-                            MediaType.MOVIE -> getSearchMovie(page, query)
-                            MediaType.TV -> getSearchTv(page, query)
+                            MediaType.MOVIE -> mediaMapper.mapMedias(
+                                searchMovies(page, query),
+                                page
+                            )
+                            MediaType.TV -> mediaMapper.mapMedias(
+                                searchTv(page, query),
+                                page
+                            )
                         }
                     }
                 )
@@ -36,9 +45,9 @@ class SearchInteractor @Inject constructor(
         ).flow
     }
 
-    private suspend fun getSearchMovie(page: Int, query: String): List<Movie> =
+    private suspend fun searchMovies(page: Int, query: String): List<Movie> =
         iSearchRepository.searchMovie(page, query)
 
-    private suspend fun getSearchTv(page: Int, query: String): List<Movie> =
+    private suspend fun searchTv(page: Int, query: String): List<Movie> =
         iSearchRepository.searchTv(page, query)
 }
