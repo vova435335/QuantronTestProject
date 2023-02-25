@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">QuantronTestProject</string>
+
+    <!--  BottomNavigationMenu  -->
+    <string name="menu_title_home">Домашняя</string>
+    <string name="menu_title_search">Поиск</string>
+    <string name="menu_title_profile">Профиль</string>
+
+    <!--  NavGraph  -->
+    <string name="nav_graph_home_label">Домашняя</string>
+    <string name="nav_graph_search_label">Поиск</string>
+    <string name="nav_graph_profile_label">Профиль</string>
 </resources>

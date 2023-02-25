@@ -7,6 +7,16 @@
     <fragment
         android:id="@+id/homeFragment"
         android:name="dev.vladimir.home.presintation.HomeFragment"
-        android:label="HomeFragment"
+        android:label="@string/nav_graph_home_label"
         tools:layout="@layout/fragment_home"/>
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="dev.vladimir.search.SearchFragment"
+        android:label="@string/nav_graph_search_label"
+        tools:layout="@layout/fragment_search"/>
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="dev.vladimir.profile.ProfileFragment"
+        android:label="@string/nav_graph_profile_label"
+        tools:layout="@layout/fragment_profile"/>
 </navigation>

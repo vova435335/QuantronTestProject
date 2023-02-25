@@ -16,3 +16,5 @@ rootProject.name = "QuantronTestProject"
 include ':app'
 include ':core'
 include ':home'
+include ':search'
+include ':profile'

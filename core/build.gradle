@@ -12,6 +12,9 @@ dependencies {
     api(
             retrofit,
             retrofit_gson_converter,
-            gson
+            gson,
+            fragment_ktx,
+            androidx_paging,
+            swipe_refresh_layout
     )
 }
