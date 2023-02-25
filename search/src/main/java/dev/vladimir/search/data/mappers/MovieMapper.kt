@@ -6,14 +6,14 @@ import dev.vladimir.core.data.response.MoviesResponseModel
 import dev.vladimir.search.domain.model.Movie
 import javax.inject.Inject
 
-class MediaMappers @Inject constructor() {
+class MovieMapper @Inject constructor() {
 
-    fun mapMedias(multiSearchResponseModel: MoviesResponseModel): List<Movie> =
-        multiSearchResponseModel.movies.map(::mapMedia)
+    fun mapMovies(movieResponseModel: MoviesResponseModel): List<Movie> =
+        movieResponseModel.movies.map(::mapMovie)
 
-    private fun mapMedia(mediaResponse: MovieResponse): Movie = Movie(
+    private fun mapMovie(mediaResponse: MovieResponse): Movie = Movie(
         id = mediaResponse.id,
         title = mediaResponse.title,
-        posterPath =  BuildConfig.POSTER_BASE_URL + mediaResponse.posterPath
+        posterPath = BuildConfig.POSTER_BASE_URL + mediaResponse.posterPath
     )
 }

@@ -27,7 +27,7 @@ class SearchViewModel @Inject constructor(
 
     private fun getSearchMovies() {
         viewModelScope.launch {
-            searchInteractor.getPagingSearchMovies("k")
+            searchInteractor.getPagingSearchMovies("thei")
                 .cachedIn(viewModelScope)
                 .collect(mutableSearchMoviesState::emit)
         }
