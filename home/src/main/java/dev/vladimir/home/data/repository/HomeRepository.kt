@@ -14,6 +14,6 @@ class HomeRepository @Inject constructor(
 
     override suspend fun getPopularMovies(page: Int) =
         withContext(Dispatchers.IO) {
-            popularMovieMapper.mupMovies(movieApi.getPopularMovies(page = page))
+            popularMovieMapper.mapMovies(movieApi.getPopularMovies(page))
         }
 }
