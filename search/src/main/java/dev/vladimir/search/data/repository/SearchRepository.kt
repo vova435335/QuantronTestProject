@@ -6,8 +6,11 @@ import dev.vladimir.search.data.mappers.TvMapper
 import dev.vladimir.search.domain.model.Movie
 import dev.vladimir.search.domain.repository.ISearchRepository
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
+
+private const val SEARCH_DELAY = 300L
 
 class SearchRepository @Inject constructor(
     private val movieApi: MovieApi,
@@ -17,6 +20,7 @@ class SearchRepository @Inject constructor(
 
     override suspend fun searchMovie(page: Int, query: String): List<Movie> =
         withContext(Dispatchers.IO) {
+            delay(SEARCH_DELAY)
             movieMapper.mapMovies(movieApi.searchMovies(page, query))
         }
 

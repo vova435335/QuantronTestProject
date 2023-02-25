@@ -14,20 +14,16 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SearchViewModel @Inject constructor(
-    private val searchInteractor: SearchInteractor
+    private val searchInteractor: SearchInteractor,
 ) : ViewModel() {
 
     private val mutableSearchMoviesState =
         MutableStateFlow<PagingData<Media>>(PagingData.empty())
     val searchMoviesState: StateFlow<PagingData<Media>> = mutableSearchMoviesState
 
-    init {
-        getSearchMovies()
-    }
-
-    private fun getSearchMovies() {
+    fun searchMedia(query: String) {
         viewModelScope.launch {
-            searchInteractor.getPagingSearchMovies("thei")
+            searchInteractor.getPagingSearchMovies(query)
                 .cachedIn(viewModelScope)
                 .collect(mutableSearchMoviesState::emit)
         }

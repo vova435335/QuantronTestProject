@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.SearchView
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
@@ -27,6 +28,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
         super.onViewCreated(view, savedInstanceState)
 
         initRecycler()
+        initSearchView()
         observeViewModel()
     }
 
@@ -37,6 +39,17 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
             layoutManager = LinearLayoutManager(requireContext())
             adapter = searchAdapter
         }
+    }
+
+    private fun initSearchView() {
+        binding.searchSv.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean = false
+
+            override fun onQueryTextChange(newText: String): Boolean {
+                viewModel.searchMedia(newText)
+                return false
+            }
+        })
     }
 
     private fun observeViewModel() {
