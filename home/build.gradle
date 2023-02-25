@@ -12,6 +12,7 @@ dependencies {
             fragment_ktx,
             androidx_paging,
             glide,
+            swipe_refresh_layout
     )
 
     kapt glide_kapt
