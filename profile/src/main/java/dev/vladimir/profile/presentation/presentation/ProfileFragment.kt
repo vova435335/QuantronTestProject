@@ -68,6 +68,6 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
     }
 
     private fun navigateToAuth(isAuth: Boolean) {
-        if (!isAuth) (requireActivity() as AppNavigator).navigateToAuth()
+        if (!isAuth) (requireActivity() as AppNavigator).navigateProfileToAuth()
     }
 }

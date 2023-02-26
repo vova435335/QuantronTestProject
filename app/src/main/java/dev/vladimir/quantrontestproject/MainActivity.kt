@@ -37,7 +37,13 @@ class MainActivity : AppCompatActivity(R.layout.activity_main), AppNavigator {
         bottomNavigationView.setupWithNavController(navController)
     }
 
-    override fun navigateToAuth() {
+    override fun navigateProfileToAuth() {
         navController.navigate(R.id.action_profileFragment_to_authFragment)
     }
+
+    override fun navigateAuthToProfile() {
+//        navController.navigate(R.id.action_authFragment_to_profileFragment)
+    }
+
+
 }

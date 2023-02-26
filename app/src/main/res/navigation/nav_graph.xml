@@ -26,7 +26,8 @@
     <fragment
         android:id="@+id/authFragment"
         android:name="dev.vladimir.auth.presentation.AuthFragment"
-        android:label="AuthFragment" >
+        android:label="AuthFragment"
+        tools:layout="@layout/fragment_auth">
         <action
             android:id="@+id/action_authFragment_to_profileFragment"
             app:destination="@id/profileFragment" />

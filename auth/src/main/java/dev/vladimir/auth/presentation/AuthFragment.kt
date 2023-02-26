@@ -11,6 +11,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import dev.vladimir.auth.R
 import dev.vladimir.auth.databinding.FragmentAuthBinding
 import dev.vladimir.core.data.common.observe
+import dev.vladimir.core.navigation.AppNavigator
 import dev.vladimir.core.presentation.BaseFragment
 import dev.vladimir.core.presentation.model.LoadState
 
@@ -54,11 +55,18 @@ class AuthFragment : BaseFragment<FragmentAuthBinding>() {
                 }
 
                 if (state is LoadState.Error) showToast(state.message.toString())
+
+                if(state is LoadState.Success) navigateToProfile()
+
             }
         }
     }
 
     private fun showToast(message: String) {
         Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+    }
+
+    private fun navigateToProfile() {
+        (requireActivity() as AppNavigator).navigateAuthToProfile()
     }
 }
