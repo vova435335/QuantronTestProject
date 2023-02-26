@@ -33,11 +33,9 @@ class ProfileViewModel @Inject constructor(
 
     fun getProfile() {
         viewModelScope.launch {
-            profileInteractor.getProfile().collect {
-                when (it) {
-                    is Result.Success -> mutableProfileState.emit(LoadState.Success(it.data))
-                    is Result.Error -> mutableProfileState.emit(LoadState.Error(it.error))
-                }
+            when (val result = profileInteractor.getProfile()) {
+                is Result.Success -> mutableProfileState.emit(LoadState.Success(result.data))
+                is Result.Error -> mutableProfileState.emit(LoadState.Error(result.error))
             }
         }
     }

@@ -11,9 +11,7 @@ import dev.vladimir.profile.presentation.data.mapper.ProfileMapper
 import dev.vladimir.profile.presentation.domain.model.Profile
 import dev.vladimir.profile.presentation.domain.repository.IProfileRepository
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.withContext
 import retrofit2.HttpException
 import java.io.IOException
 import javax.inject.Inject
@@ -24,20 +22,20 @@ class ProfileRepository @Inject constructor(
     private val stringProvider: StringProvider,
 ) : IProfileRepository {
 
-    override fun getProfile(): Flow<Result<Profile>> = flow {
+    override suspend fun getProfile(): Result<Profile> = withContext(Dispatchers.IO) {
         val unexpectedErrorMessage = stringProvider.getString(unexpected_error_message)
         val internetConnectionErrorMessage =
             stringProvider.getString(internet_connection_error_message)
 
         try {
             when (val profile = profileTmdbApi.getProfile().toResult()) {
-                is Result.Success -> emit(profile.map(ifSuccess = { profileMapper.mapProfile(it) }))
-                else -> emit(profile.map(ifError = { unexpectedErrorMessage }))
+                is Result.Success -> profile.map(ifSuccess = { profileMapper.mapProfile(it) })
+                is Result.Error -> profile.map(ifError = { unexpectedErrorMessage })
             }
         } catch (e: HttpException) {
-            emit(Result.Error(e.localizedMessage ?: unexpectedErrorMessage))
+            Result.Error(e.localizedMessage ?: unexpectedErrorMessage)
         } catch (e: IOException) {
-            emit(Result.Error(internetConnectionErrorMessage))
+            Result.Error(internetConnectionErrorMessage)
         }
-    }.flowOn(Dispatchers.IO)
+    }
 }

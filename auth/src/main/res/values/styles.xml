@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="ThemeOverlay.MyApp.TextInputLayout.OutlinedBox" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="hintTextColor">?attr/colorPrimaryVariant</item>
+        <item name="boxStrokeColor">?attr/colorPrimaryVariant</item>
+        <item name="boxStrokeWidth">2dp</item>
+        <item name="android:textColorHint">?attr/colorOnSurface</item>
+        <item name="passwordToggleTint">?attr/colorOnSurface</item>
+        <item name="colorPrimary">?attr/colorAccent</item>
+    </style>
+
+    <style name="TextInputEditStyle" >
+        <item name="colorPrimary">?attr/colorAccent</item>
+        <item name="android:textColor">?attr/colorAccent</item>
+        <item name="android:textCursorDrawable">@null</item>
+    </style>
+
+</resources>
