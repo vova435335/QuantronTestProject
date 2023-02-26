@@ -38,9 +38,7 @@ dependencies {
     implementation(
             android_core_ktx,
             androidx_appcompat,
-            material,
-            navigation_fragment,
-            navigation_ui
+            material
     )
 
     testImplementation junit

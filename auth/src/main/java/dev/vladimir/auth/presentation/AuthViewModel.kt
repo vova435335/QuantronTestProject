@@ -20,7 +20,7 @@ class AuthViewModel @Inject constructor(
 ) : ViewModel() {
 
     private val mutableAuthState =
-        MutableStateFlow<LoadState<Unit>>(LoadState.Success(Unit))
+        MutableStateFlow<LoadState<Unit>>(LoadState.Init(Unit))
     val authState: StateFlow<LoadState<Unit>> = mutableAuthState
 
     fun login(login: String, password: String) {

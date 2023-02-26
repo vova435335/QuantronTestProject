@@ -2,6 +2,8 @@ package dev.vladimir.core.presentation.model
 
 sealed class LoadState<T>(val data: T? = null, val message: String? = null) {
 
+    class Init<T>(data: T? = null) : LoadState<T>(data)
+
     class Loading<T>(data: T? = null) : LoadState<T>(data)
 
     class Success<T>(data: T) : LoadState<T>(data)

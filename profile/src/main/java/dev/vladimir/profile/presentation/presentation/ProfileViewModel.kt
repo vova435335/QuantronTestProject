@@ -8,7 +8,9 @@ import dev.vladimir.core.presentation.model.LoadState
 import dev.vladimir.profile.presentation.domain.ProfileInteractor
 import dev.vladimir.profile.presentation.domain.model.Profile
 import dev.vladimir.session.data.storage.SessionStorage
+import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -23,13 +25,8 @@ class ProfileViewModel @Inject constructor(
         MutableStateFlow<LoadState<Profile>>(LoadState.Loading())
     val profileState: StateFlow<LoadState<Profile>> = mutableProfileState
 
-    private val mutableAuthState = MutableStateFlow(false)
-    val authState: StateFlow<Boolean> = mutableAuthState
-
-    init {
-        checkAuth()
-        getProfile()
-    }
+    private val mutableIsAuthState = MutableSharedFlow<Boolean>()
+    val isAuthState: SharedFlow<Boolean> = mutableIsAuthState
 
     fun getProfile() {
         viewModelScope.launch {
@@ -40,12 +37,13 @@ class ProfileViewModel @Inject constructor(
         }
     }
 
-    private fun checkAuth() {
+    fun checkAuth() {
         viewModelScope.launch {
             if (sessionStorage.getSessionId() == null) {
-                mutableAuthState.emit(false)
+                mutableIsAuthState.emit(false)
             } else {
-                mutableAuthState.emit(true)
+                getProfile()
+                mutableIsAuthState.emit(true)
             }
         }
     }

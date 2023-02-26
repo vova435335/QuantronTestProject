@@ -16,7 +16,9 @@ dependencies {
             gson,
             fragment_ktx,
             androidx_paging,
-            swipe_refresh_layout
+            swipe_refresh_layout,
+            navigation_fragment,
+            navigation_ui
     )
 
     implementation project(':session')
