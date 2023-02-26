@@ -7,5 +7,5 @@ dependencies {
     kapt glide_kapt
 
     implementation project(":core")
-    implementation project(":auth")
+    implementation project(":session")
 }

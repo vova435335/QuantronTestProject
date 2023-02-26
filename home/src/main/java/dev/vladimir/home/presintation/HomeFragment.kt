@@ -23,11 +23,6 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     private lateinit var popularMovieAdapter: PopularMovieAdapter
     private lateinit var popularMovieBottomAdapter: DefaultBottomLoadStateAdapter
 
-//    override fun createBinding(
-//        inflater: LayoutInflater,
-//        container: ViewGroup?,
-//    ): FragmentHomeBinding = FragmentHomeBinding.inflate(inflater, container, false)
-
     private lateinit var binding: FragmentHomeBinding
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -81,17 +76,16 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     private fun listenLoadState() {
         popularMovieAdapter.addLoadStateListener {
             with(binding) {
-                when (it.refresh) {
-                    is LoadState.Loading -> {
+                val state = it.refresh
+                homeSrl.isRefreshing = state is LoadState.Loading
+                if (state is LoadState.NotLoading) {
+                    homeError.root.isVisible = popularMovieAdapter.itemCount == 0
+                }
+                if (state is LoadState.Error) {
+                    homeError.root.isVisible = popularMovieAdapter.itemCount == 0
+                    homeError.errorTryAgainButton.setOnClickListener {
                         homeSrl.isRefreshing = true
-                    }
-                    is LoadState.Error -> {
-                        homeSrl.isRefreshing = false
-                        homeError.root.isVisible = popularMovieAdapter.itemCount == 0
-                    }
-                    is LoadState.NotLoading -> {
-                        homeSrl.isRefreshing = false
-                        homeError.root.isVisible = popularMovieAdapter.itemCount == 0
+                        popularMovieAdapter.refresh()
                     }
                 }
             }

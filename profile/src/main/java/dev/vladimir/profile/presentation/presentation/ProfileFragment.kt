@@ -9,6 +9,7 @@ import androidx.fragment.app.viewModels
 import com.bumptech.glide.Glide
 import dagger.hilt.android.AndroidEntryPoint
 import dev.vladimir.core.data.common.observe
+import dev.vladimir.core.navigation.AppNavigator
 import dev.vladimir.core.presentation.BaseFragment
 import dev.vladimir.core.presentation.model.LoadState
 import dev.vladimir.profile.R
@@ -28,14 +29,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        initData()
         observeViewModel()
-
-//        (requireActivity() as AppNavigator).navigateToAuth()
-    }
-
-    private fun initData() {
-        viewModel.getProfile()
     }
 
     private fun initViews(profile: Profile) {
@@ -51,22 +45,29 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
     }
 
     private fun observeViewModel() {
-        viewModel.profileState.observe(this) { state ->
-            with(binding) {
-                profilePb.isVisible = state is LoadState.Loading
-                profileErrorView.root.isVisible = state is LoadState.Error
-                profileContentCl.isVisible = state is LoadState.Success
+        viewModel.authState.observe(this) { isAuth -> navigateToAuth(isAuth) }
+        viewModel.profileState.observe(this) { state -> observeLoadState(state) }
+    }
 
-                if (state is LoadState.Success) initViews(state.data ?: Profile())
-                if (state is LoadState.Error) {
-                    profileErrorView.errorMessageTv.text = state.message
-                    profileErrorView.errorTryAgainButton.setOnClickListener {
-                        viewModel.getProfile()
-                        profilePb.isVisible = true
-                        profileErrorView.root.isVisible = false
-                    }
+    private fun observeLoadState(state: LoadState<Profile>) {
+        with(binding) {
+            profilePb.isVisible = state is LoadState.Loading
+            profileErrorView.root.isVisible = state is LoadState.Error
+            profileContentCl.isVisible = state is LoadState.Success
+
+            if (state is LoadState.Success) initViews(state.data ?: Profile())
+            if (state is LoadState.Error) {
+                profileErrorView.errorMessageTv.text = state.message
+                profileErrorView.errorTryAgainButton.setOnClickListener {
+                    viewModel.getProfile()
+                    profilePb.isVisible = true
+                    profileErrorView.root.isVisible = false
                 }
             }
         }
+    }
+
+    private fun navigateToAuth(isAuth: Boolean) {
+        if (!isAuth) (requireActivity() as AppNavigator).navigateToAuth()
     }
 }
