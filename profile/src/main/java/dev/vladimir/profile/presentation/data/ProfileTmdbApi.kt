@@ -6,6 +6,6 @@ import retrofit2.http.GET
 
 interface ProfileTmdbApi {
 
-    @GET("/account")
+    @GET("/3/account")
     suspend fun getProfile(): Response<ProfileResponseModel>
 }

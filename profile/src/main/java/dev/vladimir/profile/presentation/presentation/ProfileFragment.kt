@@ -6,10 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
+import com.bumptech.glide.Glide
 import dagger.hilt.android.AndroidEntryPoint
 import dev.vladimir.core.data.common.observe
 import dev.vladimir.core.presentation.BaseFragment
 import dev.vladimir.core.presentation.model.LoadState
+import dev.vladimir.profile.R
 import dev.vladimir.profile.databinding.FragmentProfileBinding
 import dev.vladimir.profile.presentation.domain.model.Profile
 
@@ -40,6 +42,11 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
         with(binding) {
             profileNameValueTv.text = profile.name
             profileUsernameValueTv.text = profile.username
+            Glide.with(profileAvatarIv)
+                .load(profile.avatar_path)
+                .circleCrop()
+                .placeholder(R.drawable.ic_person)
+                .into(profileAvatarIv)
         }
     }
 
@@ -51,7 +58,14 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
                 profileContentCl.isVisible = state is LoadState.Success
 
                 if (state is LoadState.Success) initViews(state.data ?: Profile())
-                if (state is LoadState.Error) profileErrorView.errorMessageTv.text = state.message
+                if (state is LoadState.Error) {
+                    profileErrorView.errorMessageTv.text = state.message
+                    profileErrorView.errorTryAgainButton.setOnClickListener {
+                        viewModel.getProfile()
+                        profilePb.isVisible = true
+                        profileErrorView.root.isVisible = false
+                    }
+                }
             }
         }
     }
