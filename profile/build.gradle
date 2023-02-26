@@ -1,2 +1,6 @@
 applyAndroidConfiguration(this)
 base_dependencies(this)
+
+dependencies {
+    implementation project(":core")
+}
