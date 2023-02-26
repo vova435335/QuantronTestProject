@@ -1,13 +1,15 @@
-package dev.vladimir.profile.data.repository
+package dev.vladimir.auth.data.repository
 
-import dev.vladimir.profile.data.TmdbAuthApi
-import dev.vladimir.profile.data.model.User
-import dev.vladimir.profile.data.request.RequestSessionBody
-import dev.vladimir.profile.data.request.RequestTokenBody
+import dev.vladimir.auth.data.TmdbAuthApi
+import dev.vladimir.auth.data.model.User
+import dev.vladimir.auth.data.request.RequestSessionBody
+import dev.vladimir.auth.data.request.RequestTokenBody
 import dev.vladimir.session.data.storage.SessionStorage
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
+
+// Сохранение в сторедж вынести в interactor
 
 class ProfileRepository @Inject constructor(
     private val tmdbAuthApi: TmdbAuthApi,

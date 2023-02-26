@@ -1,4 +1,4 @@
-package dev.vladimir.profile.data.request
+package dev.vladimir.auth.data.request
 
 import com.google.gson.annotations.SerializedName
 

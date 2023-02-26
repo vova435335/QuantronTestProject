@@ -1,4 +1,4 @@
-package dev.vladimir.profile.data.model
+package dev.vladimir.auth.data.model
 
 data class User(
     val login: String,

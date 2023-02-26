@@ -1,10 +1,10 @@
-package dev.vladimir.profile.di
+package dev.vladimir.auth.di
 
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import dev.vladimir.profile.data.TmdbAuthApi
+import dev.vladimir.auth.data.TmdbAuthApi
 import retrofit2.Retrofit
 import javax.inject.Singleton
 

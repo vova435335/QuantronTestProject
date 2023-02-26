@@ -1,9 +1,9 @@
-package dev.vladimir.profile.data
+package dev.vladimir.auth.data
 
-import dev.vladimir.profile.data.request.RequestSessionBody
-import dev.vladimir.profile.data.request.RequestToken
-import dev.vladimir.profile.data.request.RequestTokenBody
-import dev.vladimir.profile.data.request.Session
+import dev.vladimir.auth.data.request.RequestSessionBody
+import dev.vladimir.auth.data.request.RequestToken
+import dev.vladimir.auth.data.request.RequestTokenBody
+import dev.vladimir.auth.data.request.Session
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
