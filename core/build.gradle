@@ -18,4 +18,6 @@ dependencies {
             androidx_paging,
             swipe_refresh_layout
     )
+
+    implementation project(':session')
 }

@@ -1,16 +1,17 @@
 package dev.vladimir.profile.data.repository
 
-import android.util.Log
 import dev.vladimir.profile.data.TmdbAuthApi
 import dev.vladimir.profile.data.model.User
 import dev.vladimir.profile.data.request.RequestSessionBody
 import dev.vladimir.profile.data.request.RequestTokenBody
+import dev.vladimir.session.data.storage.SessionStorage
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class ProfileRepository @Inject constructor(
     private val tmdbAuthApi: TmdbAuthApi,
+    private val sessionStorage: SessionStorage
 ) {
 
     suspend fun login(user: User = User(login = "435335vova", password = "vova7385")) {
@@ -23,12 +24,14 @@ class ProfileRepository @Inject constructor(
                     requestToken = token.requestToken
                 )
             )
-            val sessionId = tmdbAuthApi.createSessionId(
+            val session = tmdbAuthApi.createSessionId(
                 RequestSessionBody(
                     requestToken = validateToken.requestToken
                 )
             )
-            Log.d("qqq", "login: $sessionId")
+
+            sessionStorage.saveSessionId(session.sessionId)
+
         }
     }
 }

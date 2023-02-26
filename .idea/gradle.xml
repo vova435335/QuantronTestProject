@@ -15,6 +15,7 @@
             <option value="$PROJECT_DIR$/home" />
             <option value="$PROJECT_DIR$/profile" />
             <option value="$PROJECT_DIR$/search" />
+            <option value="$PROJECT_DIR$/session" />
           </set>
         </option>
       </GradleProjectSettings>
