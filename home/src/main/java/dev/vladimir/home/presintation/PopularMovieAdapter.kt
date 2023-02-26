@@ -6,7 +6,6 @@ import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import dev.vladimir.core.R.drawable
 import dev.vladimir.home.databinding.ItemPopularMovieBinding
 import dev.vladimir.home.domain.model.Movie
 
@@ -19,7 +18,6 @@ class PopularMovieAdapter :
         with(holder.binding) {
             Glide.with(itemPopularMoviePosterIv)
                 .load(movie.posterPath)
-                .placeholder(drawable.movie_placeholder)
                 .into(itemPopularMoviePosterIv)
             itemPopularMovieTitleTv.text = movie.title
         }
