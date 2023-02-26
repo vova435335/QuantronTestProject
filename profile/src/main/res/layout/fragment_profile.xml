@@ -1,74 +1,102 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@+id/profile_avatar_iv"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_marginTop="40dp"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/profile_content_cl"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        tools:visibility="visible">
+
+        <ImageView
+            android:id="@+id/profile_avatar_iv"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_marginTop="40dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="ContentDescription"
+            tools:src="@drawable/ic_person" />
+
+        <TextView
+            android:id="@+id/profile_name_title_tv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="end"
+            android:text="@string/profile_name_title"
+            android:textColor="@color/dark_gray"
+            app:layout_constraintBottom_toBottomOf="@+id/profile_name_value_tv"
+            app:layout_constraintEnd_toStartOf="@+id/profile_name_value_tv"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/profile_name_value_tv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:paddingStart="4dp"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintStart_toEndOf="@+id/profile_name_title_tv"
+            app:layout_constraintTop_toBottomOf="@+id/profile_avatar_iv"
+            tools:text="Иван" />
+
+        <TextView
+            android:id="@+id/profile_username_title_tv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="end"
+            android:text="@string/profile_username_tittle"
+            android:textColor="@color/dark_gray"
+            app:layout_constraintBottom_toBottomOf="@+id/profile_username_value_tv"
+            app:layout_constraintEnd_toStartOf="@+id/profile_username_value_tv"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/profile_username_value_tv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:paddingStart="4dp"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintStart_toEndOf="@+id/profile_name_title_tv"
+            app:layout_constraintTop_toBottomOf="@+id/profile_name_value_tv"
+            tools:text="username" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ProgressBar
+        android:id="@+id/profile_pb"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center"
+        android:indeterminateTint="@color/black"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="ContentDescription"
-        tools:src="@drawable/ic_person" />
-
-    <TextView
-        android:id="@+id/profile_name_title_tv"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:gravity="end"
-        android:textColor="@color/dark_gray"
-        app:layout_constraintBottom_toBottomOf="@+id/profile_name_value_tv"
-        app:layout_constraintEnd_toStartOf="@+id/profile_name_value_tv"
-        app:layout_constraintHorizontal_chainStyle="packed"
-        app:layout_constraintHorizontal_weight="1"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:text="Имя:" />
-
-    <TextView
-        android:id="@+id/profile_name_value_tv"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:paddingStart="4dp"
-        android:textColor="@color/black"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_weight="1"
-        app:layout_constraintStart_toEndOf="@+id/profile_name_title_tv"
-        app:layout_constraintTop_toBottomOf="@+id/profile_avatar_iv"
-        tools:text="Иван" />
-
-    <TextView
-        android:id="@+id/profile_username_title_tv"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:gravity="end"
-        android:textColor="@color/dark_gray"
-        app:layout_constraintBottom_toBottomOf="@+id/profile_username_value_tv"
-        app:layout_constraintEnd_toStartOf="@+id/profile_username_value_tv"
-        app:layout_constraintHorizontal_chainStyle="packed"
-        app:layout_constraintHorizontal_weight="1"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:text="Имя пользователя:" />
-
-    <TextView
-        android:id="@+id/profile_username_value_tv"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:paddingStart="4dp"
-        android:textColor="@color/black"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_weight="1"
-        app:layout_constraintStart_toEndOf="@+id/profile_name_title_tv"
-        app:layout_constraintTop_toBottomOf="@+id/profile_name_value_tv"
-        tools:text="username" />
+        tools:visibility="visible" />
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <include
+        android:id="@+id/profile_error_view"
+        layout="@layout/view_error"
+        android:visibility="gone"
+        tools:visibility="visible" />
+
+</FrameLayout>

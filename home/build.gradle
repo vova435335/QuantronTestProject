@@ -12,4 +12,5 @@ dependencies {
     kapt glide_kapt
 
     implementation project(':core')
+    implementation project(':session')
 }

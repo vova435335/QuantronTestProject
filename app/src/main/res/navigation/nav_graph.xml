@@ -16,7 +16,7 @@
         tools:layout="@layout/fragment_search"/>
     <fragment
         android:id="@+id/profileFragment"
-        android:name="dev.vladimir.profile.presentation.ProfileFragment"
+        android:name="dev.vladimir.profile.presentation.presentation.ProfileFragment"
         android:label="@string/nav_graph_profile_label"
         tools:layout="@layout/fragment_profile">
         <action

@@ -1,36 +1,39 @@
 package dev.vladimir.home.presintation
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.core.view.isVisible
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.GridLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import dev.vladimir.core.data.common.observe
-import dev.vladimir.core.presentation.BaseFragment
 import dev.vladimir.core.presentation.adapters.DefaultBottomLoadStateAdapter
+import dev.vladimir.home.R
 import dev.vladimir.home.databinding.FragmentHomeBinding
 
 private const val SPAN_COUNT = 3
 
 @AndroidEntryPoint
-class HomeFragment : BaseFragment<FragmentHomeBinding>() {
+class HomeFragment : Fragment(R.layout.fragment_home) {
 
     private val viewModel by viewModels<HomeViewModel>()
 
     private lateinit var popularMovieAdapter: PopularMovieAdapter
     private lateinit var popularMovieBottomAdapter: DefaultBottomLoadStateAdapter
 
-    override fun createBinding(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-    ): FragmentHomeBinding = FragmentHomeBinding.inflate(inflater, container, false)
+//    override fun createBinding(
+//        inflater: LayoutInflater,
+//        container: ViewGroup?,
+//    ): FragmentHomeBinding = FragmentHomeBinding.inflate(inflater, container, false)
+
+    private lateinit var binding: FragmentHomeBinding
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        binding = FragmentHomeBinding.bind(view)
 
         initRecycler()
         initSwipeRefresh()
