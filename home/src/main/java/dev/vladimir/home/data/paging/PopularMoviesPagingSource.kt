@@ -5,7 +5,7 @@ import androidx.paging.PagingState
 import dev.vladimir.home.domain.model.Movie
 import java.lang.Exception
 
-class PopularMoviePagingSource(
+class PopularMoviesPagingSource(
     private val loader: suspend (page: Int) -> List<Movie>,
 ) : PagingSource<Int, Movie>() {
 

@@ -3,7 +3,7 @@ package dev.vladimir.home.domain
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
-import dev.vladimir.home.data.paging.PopularMoviePagingSource
+import dev.vladimir.home.data.paging.PopularMoviesPagingSource
 import dev.vladimir.home.domain.model.Movie
 import dev.vladimir.home.domain.repository.IHomeRepository
 import kotlinx.coroutines.flow.Flow
@@ -23,7 +23,7 @@ class MovieInteractor @Inject constructor(
                 enablePlaceholders = false
             ),
             pagingSourceFactory = {
-                PopularMoviePagingSource(
+                PopularMoviesPagingSource(
                     loader = { page ->
                         getPopularMovie(page)
                     }

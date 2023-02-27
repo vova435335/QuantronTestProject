@@ -1,10 +1,10 @@
-package dev.vladimir.home.data.response
+package dev.vladimir.search.data.response
 
 import com.google.gson.annotations.SerializedName
 
-data class PopularMovieResponseModel(
+data class TvResponseModel(
     @SerializedName("page") val page: Int,
-    @SerializedName("results") val movies: List<MovieResponse>,
+    @SerializedName("results") val tvList: List<TvResponse>,
     @SerializedName("total_results") val totalResults: Int,
     @SerializedName("total_pages") val totalPages: Int,
 )

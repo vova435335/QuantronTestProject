@@ -11,7 +11,7 @@
         tools:layout="@layout/fragment_home"/>
     <fragment
         android:id="@+id/searchFragment"
-        android:name="dev.vladimir.search.SearchFragment"
+        android:name="dev.vladimir.search.presentation.SearchFragment"
         android:label="@string/nav_graph_search_label"
         tools:layout="@layout/fragment_search"/>
     <fragment

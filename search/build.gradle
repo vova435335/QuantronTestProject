@@ -1,2 +1,15 @@
 applyAndroidConfiguration(this)
 base_dependencies(this)
+
+dependencies {
+    implementation(
+            fragment_ktx,
+            androidx_paging,
+            glide,
+            swipe_refresh_layout
+    )
+
+    kapt glide_kapt
+
+    implementation project(':core')
+}

@@ -1,19 +1,17 @@
 package dev.vladimir.home.data
 
-import dev.vladimir.home.data.response.PopularMovieResponseModel
+import dev.vladimir.core.data.common.DEFAULT_LANGUAGE
+import dev.vladimir.core.data.common.LANGUAGE_QUERY_KEY
+import dev.vladimir.core.data.common.PAGE_QUERY_KEY
+import dev.vladimir.home.data.response.MoviesResponseModel
 import retrofit2.http.GET
 import retrofit2.http.Query
-
-private const val LANGUAGE_QUERY_KEY = "language"
-private const val DEFAULT_LANGUAGE = "ru-RU"
-
-private const val PAGE_QUERY_KEY = "page"
 
 interface MovieApi {
 
     @GET("movie/popular")
     suspend fun getPopularMovies(
-        @Query(LANGUAGE_QUERY_KEY) language: String = DEFAULT_LANGUAGE,
-        @Query(PAGE_QUERY_KEY) page: Int
-    ): PopularMovieResponseModel
+        @Query(PAGE_QUERY_KEY) page: Int,
+        @Query(LANGUAGE_QUERY_KEY) language: String = DEFAULT_LANGUAGE
+    ): MoviesResponseModel
 }
