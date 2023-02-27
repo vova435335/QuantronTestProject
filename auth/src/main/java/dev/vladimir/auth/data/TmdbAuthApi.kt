@@ -4,6 +4,7 @@ import dev.vladimir.auth.data.request.RequestSessionBody
 import dev.vladimir.auth.data.request.RequestToken
 import dev.vladimir.auth.data.request.RequestTokenBody
 import dev.vladimir.auth.data.request.Session
+import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
@@ -11,11 +12,11 @@ import retrofit2.http.POST
 interface TmdbAuthApi {
 
     @POST("authentication/token/validate_with_login")
-    suspend fun validateRequestTokenWithLogin(@Body requestTokenBody: RequestTokenBody): RequestToken
+    suspend fun validateRequestTokenWithLogin(@Body requestTokenBody: RequestTokenBody): Response<RequestToken>
 
     @POST("authentication/session/new")
-    suspend fun createSessionId(@Body requestToken: RequestSessionBody): Session
+    suspend fun createSessionId(@Body requestToken: RequestSessionBody): Response<Session>
 
     @GET("authentication/token/new")
-    suspend fun createRequestToken(): RequestToken
+    suspend fun createRequestToken(): Response<RequestToken>
 }

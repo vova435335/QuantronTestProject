@@ -2,7 +2,9 @@ applyAndroidConfiguration(this)
 base_dependencies(this)
 
 dependencies {
-    implementation(glide)
+    implementation(
+            glide,
+    )
 
     kapt glide_kapt
 

@@ -19,16 +19,22 @@
         android:name="dev.vladimir.profile.presentation.presentation.ProfileFragment"
         android:label="@string/nav_graph_profile_label"
         tools:layout="@layout/fragment_profile">
-        <action
-            android:id="@+id/action_profileFragment_to_authFragment"
-            app:destination="@id/authFragment" />
     </fragment>
     <fragment
         android:id="@+id/authFragment"
         android:name="dev.vladimir.auth.presentation.AuthFragment"
-        android:label="AuthFragment" >
-        <action
-            android:id="@+id/action_authFragment_to_profileFragment"
-            app:destination="@id/profileFragment" />
+        android:label="@string/nav_graph_auth_label"
+        tools:layout="@layout/fragment_auth">
+        <deepLink app:uri="@string/navigate_to_auth" />
     </fragment>
+    <fragment
+        android:id="@+id/mediaDetailsFragment"
+        android:name="dev.vladimir.details.presentation.MediaDetailsFragment"
+        android:label="@string/nav_graph_media_details_label"
+        tools:layout="@layout/fragment_media_details">
+        <argument android:name="media_id"/>
+        <argument android:name="media_type"/>
+        <deepLink app:uri="@string/navigate_to_media_details" />
+    </fragment>
+
 </navigation>

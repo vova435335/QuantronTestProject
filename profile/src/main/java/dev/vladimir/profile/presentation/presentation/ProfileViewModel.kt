@@ -8,7 +8,9 @@ import dev.vladimir.core.presentation.model.LoadState
 import dev.vladimir.profile.presentation.domain.ProfileInteractor
 import dev.vladimir.profile.presentation.domain.model.Profile
 import dev.vladimir.session.data.storage.SessionStorage
+import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -20,34 +22,28 @@ class ProfileViewModel @Inject constructor(
 ) : ViewModel() {
 
     private val mutableProfileState =
-        MutableStateFlow<LoadState<Profile>>(LoadState.Loading())
+        MutableStateFlow<LoadState<Profile>>(LoadState.Init())
     val profileState: StateFlow<LoadState<Profile>> = mutableProfileState
 
-    private val mutableAuthState = MutableStateFlow(false)
-    val authState: StateFlow<Boolean> = mutableAuthState
-
-    init {
-        checkAuth()
-        getProfile()
-    }
+    private val mutableIsAuthState = MutableSharedFlow<Boolean>()
+    val isAuthState: SharedFlow<Boolean> = mutableIsAuthState
 
     fun getProfile() {
         viewModelScope.launch {
-            profileInteractor.getProfile().collect {
-                when (it) {
-                    is Result.Success -> mutableProfileState.emit(LoadState.Success(it.data))
-                    is Result.Error -> mutableProfileState.emit(LoadState.Error(it.error))
-                }
+            when (val result = profileInteractor.getProfile()) {
+                is Result.Success -> mutableProfileState.emit(LoadState.Success(result.data))
+                is Result.Error -> mutableProfileState.emit(LoadState.Error(result.error))
             }
         }
     }
 
-    private fun checkAuth() {
+    fun checkAuth() {
         viewModelScope.launch {
             if (sessionStorage.getSessionId() == null) {
-                mutableAuthState.emit(false)
+                mutableIsAuthState.emit(false)
             } else {
-                mutableAuthState.emit(true)
+                getProfile()
+                mutableIsAuthState.emit(true)
             }
         }
     }

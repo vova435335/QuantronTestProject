@@ -22,10 +22,16 @@ class SearchViewModel @Inject constructor(
     val searchMoviesState: StateFlow<PagingData<Media>> = mutableSearchMoviesState
 
     fun searchMedia(query: String) {
+
         viewModelScope.launch {
-            searchInteractor.getPagingSearchMovies(query)
-                .cachedIn(viewModelScope)
-                .collect(mutableSearchMoviesState::emit)
+            if (query.isNotEmpty()) {
+                searchInteractor.getPagingSearchMovies(query)
+                    .cachedIn(viewModelScope)
+                    .collect(mutableSearchMoviesState::emit)
+            } else {
+                mutableSearchMoviesState.emit(PagingData.empty())
+            }
         }
+
     }
 }

@@ -4,12 +4,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.net.toUri
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
+import androidx.navigation.NavDeepLinkRequest
+import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import dagger.hilt.android.AndroidEntryPoint
 import dev.vladimir.core.data.common.observe
-import dev.vladimir.core.navigation.AppNavigator
 import dev.vladimir.core.presentation.BaseFragment
 import dev.vladimir.core.presentation.model.LoadState
 import dev.vladimir.profile.R
@@ -32,6 +34,11 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
         observeViewModel()
     }
 
+    override fun onResume() {
+        super.onResume()
+        viewModel.checkAuth()
+    }
+
     private fun initViews(profile: Profile) {
         with(binding) {
             profileNameValueTv.text = profile.name
@@ -45,7 +52,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
     }
 
     private fun observeViewModel() {
-        viewModel.authState.observe(this) { isAuth -> navigateToAuth(isAuth) }
+        viewModel.isAuthState.observe(this) { isAuth -> navigateToAuth(isAuth) }
         viewModel.profileState.observe(this) { state -> observeLoadState(state) }
     }
 
@@ -68,6 +75,11 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
     }
 
     private fun navigateToAuth(isAuth: Boolean) {
-        if (!isAuth) (requireActivity() as AppNavigator).navigateToAuth()
+        if (!isAuth){
+            val request = NavDeepLinkRequest.Builder
+                .fromUri(getString(dev.vladimir.core.R.string.navigate_to_auth).toUri())
+                .build()
+            findNavController().navigate(request)
+        }
     }
 }

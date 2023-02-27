@@ -10,10 +10,9 @@ import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
-import dev.vladimir.core.navigation.AppNavigator
 
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity(R.layout.activity_main), AppNavigator {
+class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
     private lateinit var navController: NavController
 
@@ -35,9 +34,5 @@ class MainActivity : AppCompatActivity(R.layout.activity_main), AppNavigator {
 
         NavigationUI.setupWithNavController(toolbar, navController, appBarConfiguration)
         bottomNavigationView.setupWithNavController(navController)
-    }
-
-    override fun navigateToAuth() {
-        navController.navigate(R.id.action_profileFragment_to_authFragment)
     }
 }
