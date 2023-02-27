@@ -6,4 +6,6 @@ import dev.vladimir.details.domain.model.MediaDetailsModel
 interface IMediaDetailRepository {
 
     suspend fun getMovieDetails(movieId: String): Result<MediaDetailsModel>
+
+    suspend fun getTvDetails(tvId: String): Result<MediaDetailsModel>
 }

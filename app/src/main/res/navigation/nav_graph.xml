@@ -33,6 +33,7 @@
         android:label="@string/nav_graph_media_details_label"
         tools:layout="@layout/fragment_media_details">
         <argument android:name="media_id"/>
+        <argument android:name="media_type"/>
         <deepLink app:uri="@string/navigate_to_media_details" />
     </fragment>
 

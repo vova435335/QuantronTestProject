@@ -9,5 +9,5 @@
 
     <!--  DeapLinks  -->
     <string name="navigate_to_auth">android-app://dev.vladimir.auth.presentation.auth_fragment</string>
-    <string name="navigate_to_media_details">android-app://dev.vladimir.auth.presentation.auth_fragment/{media_id}</string>
+    <string name="navigate_to_media_details">android-app://dev.vladimir.auth.presentation.auth_fragment/{media_id}/{media_type}</string>
 </resources>

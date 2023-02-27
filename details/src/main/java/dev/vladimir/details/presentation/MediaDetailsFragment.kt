@@ -1,6 +1,7 @@
 package dev.vladimir.details.presentation
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -23,7 +24,8 @@ class MediaDetailsFragment : BaseFragment<FragmentMediaDetailsBinding>() {
 
     private val viewModel by viewModels<MediaDetailsViewModel>()
 
-    private val argument by lazy { arguments?.getString("media_id") }
+    private val argumentId by lazy { arguments?.getString("media_id") }
+    private val argumentMediaType by lazy { arguments?.getString("media_type") }
 
     lateinit var actorsAdapter: ActorsAdapter
 
@@ -36,13 +38,15 @@ class MediaDetailsFragment : BaseFragment<FragmentMediaDetailsBinding>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        Log.d("qqq", "onViewCreated: $argumentMediaType")
+
         initData()
         initRecycler()
         observeViewModel()
     }
 
     private fun initData() {
-        viewModel.getMediaDetails(argument ?: "")
+        viewModel.getMediaDetails(argumentId ?: "", argumentMediaType ?: "1")
     }
 
     private fun initRecycler() {

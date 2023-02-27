@@ -6,6 +6,7 @@ import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import dev.vladimir.search.data.paging.MediaType
 import dev.vladimir.search.databinding.ItemHeaderBinding
 import dev.vladimir.search.databinding.ItemMediaBinding
 import dev.vladimir.search.domain.model.Media
@@ -14,7 +15,7 @@ private const val HEADER_TYPE = 0
 private const val MOVIE_TYPE = 1
 
 class MediaAdapter(
-    private val openDetails: (mediaId: String) -> Unit,
+    private val openDetails: (mediaId: String, mediaType: MediaType) -> Unit,
 ) : PagingDataAdapter<Media, RecyclerView.ViewHolder>(PopularMoviesDiffUtilCallback()) {
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
@@ -27,7 +28,9 @@ class MediaAdapter(
                         .load(media.posterPath)
                         .into(itemMediaPosterIv)
                     itemMediaTitleTv.text = media.title
-                    itemMediaContainerCl.setOnClickListener { openDetails(media.id.toString()) }
+                    itemMediaContainerCl.setOnClickListener {
+                        openDetails(media.id.toString(), media.mediaType)
+                    }
                 }
             }
             holder is HeaderHolder && media is Media.Header -> {

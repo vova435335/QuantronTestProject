@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import dev.vladimir.core.data.common.observe
 import dev.vladimir.core.presentation.BaseFragment
+import dev.vladimir.search.data.paging.MediaType
 import dev.vladimir.search.databinding.FragmentSearchBinding
 
 @AndroidEntryPoint
@@ -36,7 +37,9 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
     }
 
     private fun initRecycler() {
-        searchAdapter = MediaAdapter( openDetails = { navigateToMediaDetails(it) } )
+        searchAdapter = MediaAdapter(openDetails = { mediaId, mediaType ->
+            navigateToMediaDetails(mediaId, mediaType)
+        })
 
         binding.searchRv.apply {
             layoutManager = LinearLayoutManager(requireContext())
@@ -61,10 +64,13 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
         }
     }
 
-    private fun navigateToMediaDetails(mediaId: String) {
+    private fun navigateToMediaDetails(mediaId: String, mediaType: MediaType) {
+//        val uri = getString(dev.vladimir.core.R.string.navigate_to_media_details)
         val request = NavDeepLinkRequest.Builder
             .fromUri(getString(dev.vladimir.core.R.string.navigate_to_media_details)
-                .replace("{media_id}", mediaId).toUri())
+                .replace("{media_id}", mediaId)
+                .replace("{media_type}", mediaType.id.toString())
+                .toUri())
             .build()
         findNavController().navigate(request)
     }

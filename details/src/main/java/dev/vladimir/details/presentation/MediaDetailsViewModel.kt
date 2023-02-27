@@ -21,9 +21,9 @@ class MediaDetailsViewModel @Inject constructor(
         MutableStateFlow<LoadState<MediaDetailsModel>>(LoadState.Loading())
     val mediaDetailsState: StateFlow<LoadState<MediaDetailsModel>> = mutableMediaDetailsState
 
-    fun getMediaDetails(mediaId: String) {
+    fun getMediaDetails(mediaId: String, mediaType: String) {
         viewModelScope.launch {
-            when (val result = mediaDetailsInteractor.getMovieDetails(mediaId)) {
+            when (val result = mediaDetailsInteractor.getMediaDetails(mediaId, mediaType)) {
                 is Result.Success -> mutableMediaDetailsState.emit(LoadState.Success(result.data))
                 is Result.Error -> mutableMediaDetailsState.emit(LoadState.Error(result.error))
             }
