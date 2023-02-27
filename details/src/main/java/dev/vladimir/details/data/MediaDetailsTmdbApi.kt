@@ -10,12 +10,12 @@ private const val MOVIE_ID_PATH_PARAM_KEY = "movie_id"
 
 interface MediaDetailsTmdbApi {
 
-    @GET("/movie/{$MOVIE_ID_PATH_PARAM_KEY}")
+    @GET("/3/movie/{$MOVIE_ID_PATH_PARAM_KEY}")
     suspend fun getMovieDetails(
         @Path("movie_id") movieId: String
     ): Response<MovieDetailsResponseModel>
 
-    @GET("/movie/{$MOVIE_ID_PATH_PARAM_KEY}/credits")
+    @GET("/3/movie/{$MOVIE_ID_PATH_PARAM_KEY}/credits")
     suspend fun getActors(
         @Path("movie_id") movieId: String
     ): Response<MovieActorsResponseModel>

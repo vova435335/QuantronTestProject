@@ -5,7 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SearchView
+import androidx.core.net.toUri
 import androidx.fragment.app.viewModels
+import androidx.navigation.NavDeepLinkRequest
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import dev.vladimir.core.data.common.observe
@@ -33,7 +36,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
     }
 
     private fun initRecycler() {
-        searchAdapter = MediaAdapter()
+        searchAdapter = MediaAdapter( openDetails = { navigateToMediaDetails(it) } )
 
         binding.searchRv.apply {
             layoutManager = LinearLayoutManager(requireContext())
@@ -56,5 +59,13 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
         viewModel.searchMoviesState.observe(this) {
             searchAdapter.submitData(lifecycle, it)
         }
+    }
+
+    private fun navigateToMediaDetails(mediaId: String) {
+        val request = NavDeepLinkRequest.Builder
+            .fromUri(getString(dev.vladimir.core.R.string.navigate_to_media_details)
+                .replace("{media_id}", mediaId).toUri())
+            .build()
+        findNavController().navigate(request)
     }
 }

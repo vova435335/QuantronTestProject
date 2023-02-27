@@ -23,8 +23,17 @@
     <fragment
         android:id="@+id/authFragment"
         android:name="dev.vladimir.auth.presentation.AuthFragment"
-        android:label="AuthFragment"
+        android:label="@string/nav_graph_auth_label"
         tools:layout="@layout/fragment_auth">
         <deepLink app:uri="@string/navigate_to_auth" />
     </fragment>
+    <fragment
+        android:id="@+id/mediaDetailsFragment"
+        android:name="dev.vladimir.details.presentation.MediaDetailsFragment"
+        android:label="@string/nav_graph_media_details_label"
+        tools:layout="@layout/fragment_media_details">
+        <argument android:name="media_id"/>
+        <deepLink app:uri="@string/navigate_to_media_details" />
+    </fragment>
+
 </navigation>

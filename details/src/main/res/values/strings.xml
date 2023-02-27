@@ -2,5 +2,5 @@
 <resources>
     <string name="media_details_release_date_title">Дата выхода:</string>
     <string name="media_details_runtime_title">Продолжительность:</string>
-    <string name="media_details_runtime_min">минут</string>
+    <string name="media_details_runtime_min">мин</string>
 </resources>

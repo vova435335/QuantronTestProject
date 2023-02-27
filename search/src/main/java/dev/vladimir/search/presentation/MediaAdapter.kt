@@ -13,8 +13,9 @@ import dev.vladimir.search.domain.model.Media
 private const val HEADER_TYPE = 0
 private const val MOVIE_TYPE = 1
 
-class MediaAdapter :
-    PagingDataAdapter<Media, RecyclerView.ViewHolder>(PopularMoviesDiffUtilCallback()) {
+class MediaAdapter(
+    private val openDetails: (mediaId: String) -> Unit,
+) : PagingDataAdapter<Media, RecyclerView.ViewHolder>(PopularMoviesDiffUtilCallback()) {
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val media = getItem(position) ?: return
@@ -26,6 +27,7 @@ class MediaAdapter :
                         .load(media.posterPath)
                         .into(itemMediaPosterIv)
                     itemMediaTitleTv.text = media.title
+                    itemMediaContainerCl.setOnClickListener { openDetails(media.id.toString()) }
                 }
             }
             holder is HeaderHolder && media is Media.Header -> {

@@ -2,6 +2,7 @@ package dev.vladimir.details.presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import dagger.hilt.android.lifecycle.HiltViewModel
 import dev.vladimir.core.data.common.models.Result
 import dev.vladimir.core.presentation.model.LoadState
 import dev.vladimir.details.domain.MediaDetailsInteractor
@@ -11,6 +12,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+@HiltViewModel
 class MediaDetailsViewModel @Inject constructor(
     private val mediaDetailsInteractor: MediaDetailsInteractor,
 ) : ViewModel() {
@@ -22,8 +24,8 @@ class MediaDetailsViewModel @Inject constructor(
     fun getMediaDetails(mediaId: String) {
         viewModelScope.launch {
             when (val result = mediaDetailsInteractor.getMovieDetails(mediaId)) {
-                is Result.Success -> LoadState.Success(result.data)
-                is Result.Error -> LoadState.Error(result.error)
+                is Result.Success ->  mutableMediaDetailsState.emit(LoadState.Success(result.data))
+                is Result.Error -> mutableMediaDetailsState.emit(LoadState.Error(result.error))
             }
         }
     }
