@@ -23,7 +23,7 @@ class PopularMediaAdapter(
                 .load(media.posterPath)
                 .into(itemPopularMoviePosterIv)
             itemPopularMovieTitleTv.text = media.title
-            itemMediaContainerCv.setOnClickListener {
+            itemMediaContainerCl.setOnClickListener {
                 openDetails(
                     media.id.toString(),
                     media.mediaType
