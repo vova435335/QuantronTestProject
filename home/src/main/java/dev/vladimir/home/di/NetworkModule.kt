@@ -4,7 +4,7 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import dev.vladimir.home.data.MovieApi
+import dev.vladimir.home.data.PopularMediaTmdbApi
 import retrofit2.Retrofit
 import javax.inject.Singleton
 
@@ -14,6 +14,6 @@ class NetworkModule {
 
     @Singleton
     @Provides
-    fun provideMovieApi(retrofit: Retrofit): MovieApi =
-        retrofit.create(MovieApi::class.java)
+    fun provideMovieApi(retrofit: Retrofit): PopularMediaTmdbApi =
+        retrofit.create(PopularMediaTmdbApi::class.java)
 }

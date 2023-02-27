@@ -65,7 +65,6 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
     }
 
     private fun navigateToMediaDetails(mediaId: String, mediaType: MediaType) {
-//        val uri = getString(dev.vladimir.core.R.string.navigate_to_media_details)
         val request = NavDeepLinkRequest.Builder
             .fromUri(getString(dev.vladimir.core.R.string.navigate_to_media_details)
                 .replace("{media_id}", mediaId)
