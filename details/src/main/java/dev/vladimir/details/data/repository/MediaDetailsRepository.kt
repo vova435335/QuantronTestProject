@@ -1,5 +1,6 @@
 package dev.vladimir.details.data.repository
 
+import android.util.Log
 import dev.vladimir.core.R
 import dev.vladimir.core.data.common.map
 import dev.vladimir.core.data.common.models.Result
@@ -52,10 +53,19 @@ class MediaDetailsRepository @Inject constructor(
     private suspend fun getActors(movieId: String): List<Actor> =
         try {
             when (val actors = mediaDetailsTmdbApi.getActors(movieId).toResult()) {
-                is Result.Success -> movieActorsMapper.mapMovieActors(actors.data)
-                is Result.Error -> emptyList()
+                is Result.Success -> {
+                    Log.d("qqq", "SUCCESS")
+
+                    movieActorsMapper.mapMovieActors(actors.data)
+                }
+                is Result.Error -> {
+                    Log.d("qqq", "getActors: ${actors.error}")
+
+                    emptyList()
+                }
             }
         } catch (e: Exception) {
+            Log.d("qqq", "getActors: $e")
             emptyList()
         }
 }

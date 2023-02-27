@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.core.view.size
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.google.android.material.chip.Chip
 import dagger.hilt.android.AndroidEntryPoint
@@ -24,6 +25,8 @@ class MediaDetailsFragment : BaseFragment<FragmentMediaDetailsBinding>() {
 
     private val argument by lazy { arguments?.getString("media_id") }
 
+    lateinit var actorsAdapter: ActorsAdapter
+
     override fun createBinding(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -33,8 +36,22 @@ class MediaDetailsFragment : BaseFragment<FragmentMediaDetailsBinding>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.getMediaDetails(argument ?: "")
+        initData()
+        initRecycler()
         observeViewModel()
+    }
+
+    private fun initData() {
+        viewModel.getMediaDetails(argument ?: "")
+    }
+
+    private fun initRecycler() {
+        actorsAdapter = ActorsAdapter()
+
+        binding.mediaDetailsRv.apply {
+            layoutManager = LinearLayoutManager(requireContext())
+            adapter = actorsAdapter
+        }
     }
 
     private fun initViews(media: MediaDetailsModel) {
@@ -56,6 +73,8 @@ class MediaDetailsFragment : BaseFragment<FragmentMediaDetailsBinding>() {
                     mediaDetailsGenresCg.addView(chip)
                 }
             }
+
+            actorsAdapter.submitList(media.actors)
         }
     }
 
@@ -73,7 +92,7 @@ class MediaDetailsFragment : BaseFragment<FragmentMediaDetailsBinding>() {
             if (state is LoadState.Error) {
                 mediaDetailsErrorView.errorMessageTv.text = state.message
                 mediaDetailsErrorView.errorTryAgainButton.setOnClickListener {
-                    viewModel.getMediaDetails(argument ?: "")
+                    initData()
                     mediaDetailsPb.isVisible = true
                     mediaDetailsErrorView.root.isVisible = false
                 }
