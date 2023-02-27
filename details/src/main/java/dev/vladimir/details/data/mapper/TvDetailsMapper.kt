@@ -14,7 +14,7 @@ class TvDetailsMapper @Inject constructor() {
     ): MediaDetailsModel = MediaDetailsModel(
         title = tvDetailsResponseModel.name,
         releaseDate = tvDetailsResponseModel.firstAirDate,
-        runtime = tvDetailsResponseModel.episodeRunTime.first().toString(),
+        runtime = tvDetailsResponseModel.episodeRunTime.firstOrNull().toString(),
         genres = tvDetailsResponseModel.genres.map { it.name },
         posterPath = BuildConfig.POSTER_BASE_URL + tvDetailsResponseModel.posterPath,
         overview = tvDetailsResponseModel.overview,
