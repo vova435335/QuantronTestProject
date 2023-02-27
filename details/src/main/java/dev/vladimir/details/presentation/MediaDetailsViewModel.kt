@@ -18,7 +18,7 @@ class MediaDetailsViewModel @Inject constructor(
 ) : ViewModel() {
 
     private val mutableMediaDetailsState =
-        MutableStateFlow<LoadState<MediaDetailsModel>>(LoadState.Init())
+        MutableStateFlow<LoadState<MediaDetailsModel>>(LoadState.Loading())
     val mediaDetailsState: StateFlow<LoadState<MediaDetailsModel>> = mutableMediaDetailsState
 
     fun getMediaDetails(mediaId: String) {

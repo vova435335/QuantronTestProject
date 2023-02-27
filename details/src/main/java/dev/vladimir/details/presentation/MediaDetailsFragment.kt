@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.core.view.size
 import androidx.fragment.app.viewModels
 import com.bumptech.glide.Glide
@@ -21,6 +22,8 @@ class MediaDetailsFragment : BaseFragment<FragmentMediaDetailsBinding>() {
 
     private val viewModel by viewModels<MediaDetailsViewModel>()
 
+    private val argument by lazy { arguments?.getString("media_id") }
+
     override fun createBinding(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -29,8 +32,6 @@ class MediaDetailsFragment : BaseFragment<FragmentMediaDetailsBinding>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        val argument = arguments?.getString("media_id")
 
         viewModel.getMediaDetails(argument ?: "")
         observeViewModel()
@@ -59,8 +60,24 @@ class MediaDetailsFragment : BaseFragment<FragmentMediaDetailsBinding>() {
     }
 
     private fun observeViewModel() {
-        viewModel.mediaDetailsState.observe(this) { state ->
+        viewModel.mediaDetailsState.observe(this) { state -> observeLoadState(state) }
+    }
+
+    private fun observeLoadState(state: LoadState<MediaDetailsModel>) {
+        with(binding) {
+            mediaDetailsPb.isVisible = state is LoadState.Loading
+            mediaDetailsErrorView.root.isVisible = state is LoadState.Error
+            mediaDetailsContentCl.isVisible = state is LoadState.Success
+
             if (state is LoadState.Success) initViews(state.data ?: MediaDetailsModel())
+            if (state is LoadState.Error) {
+                mediaDetailsErrorView.errorMessageTv.text = state.message
+                mediaDetailsErrorView.errorTryAgainButton.setOnClickListener {
+                    viewModel.getMediaDetails(argument ?: "")
+                    mediaDetailsPb.isVisible = true
+                    mediaDetailsErrorView.root.isVisible = false
+                }
+            }
         }
     }
 }
