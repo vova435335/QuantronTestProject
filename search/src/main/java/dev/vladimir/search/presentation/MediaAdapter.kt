@@ -6,7 +6,6 @@ import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import dev.vladimir.core.R.drawable
 import dev.vladimir.search.databinding.ItemHeaderBinding
 import dev.vladimir.search.databinding.ItemMediaBinding
 import dev.vladimir.search.domain.model.Media
@@ -25,7 +24,6 @@ class MediaAdapter :
                 with(holder.binding) {
                     Glide.with(itemMediaPosterIv)
                         .load(media.posterPath)
-                        .placeholder(drawable.movie_placeholder)
                         .into(itemMediaPosterIv)
                     itemMediaTitleTv.text = media.title
                 }

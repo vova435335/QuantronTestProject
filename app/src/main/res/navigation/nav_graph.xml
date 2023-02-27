@@ -16,7 +16,19 @@
         tools:layout="@layout/fragment_search"/>
     <fragment
         android:id="@+id/profileFragment"
-        android:name="dev.vladimir.profile.ProfileFragment"
+        android:name="dev.vladimir.profile.presentation.presentation.ProfileFragment"
         android:label="@string/nav_graph_profile_label"
-        tools:layout="@layout/fragment_profile"/>
+        tools:layout="@layout/fragment_profile">
+        <action
+            android:id="@+id/action_profileFragment_to_authFragment"
+            app:destination="@id/authFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/authFragment"
+        android:name="dev.vladimir.auth.presentation.AuthFragment"
+        android:label="AuthFragment" >
+        <action
+            android:id="@+id/action_authFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+    </fragment>
 </navigation>

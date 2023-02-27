@@ -1,2 +1,11 @@
 applyAndroidConfiguration(this)
 base_dependencies(this)
+
+dependencies {
+    implementation(glide)
+
+    kapt glide_kapt
+
+    implementation project(":core")
+    implementation project(":session")
+}

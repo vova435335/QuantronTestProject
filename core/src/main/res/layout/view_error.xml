@@ -14,7 +14,6 @@
         android:src="@drawable/ic_error"
         app:layout_constraintBottom_toTopOf="@+id/error_message_tv"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_chainStyle="packed"
@@ -22,15 +21,31 @@
 
     <TextView
         android:id="@+id/error_message_tv"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_marginHorizontal="8dp"
         android:layout_height="wrap_content"
+        android:gravity="center"
         android:text="@string/error_view_message"
         android:textColor="@color/black"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="10dp"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/error_try_again_button"
+        app:layout_constraintEnd_toEndOf="@+id/error_iv"
+        app:layout_constraintStart_toStartOf="@+id/error_iv"
         app:layout_constraintTop_toBottomOf="@+id/error_iv" />
+
+    <Button
+        android:id="@+id/error_try_again_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/loader_try_again_text_button"
+        android:backgroundTint="@color/black"
+        android:textColor="#FFFFFF"
+        android:textAllCaps="false"
+        android:layout_marginTop="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/error_message_tv"
+        app:layout_constraintStart_toStartOf="@+id/error_message_tv"
+        app:layout_constraintTop_toBottomOf="@+id/error_message_tv" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
