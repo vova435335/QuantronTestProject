@@ -1,4 +1,4 @@
-package dev.vladimir.home.data.response
+package dev.vladimir.home.data.response.movie
 
 import com.google.gson.annotations.SerializedName
 

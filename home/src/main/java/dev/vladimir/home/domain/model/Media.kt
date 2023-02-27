@@ -1,7 +1,8 @@
 package dev.vladimir.home.domain.model
 
-data class Movie(
+data class Media(
     val id: Int,
     val title: String,
-    val posterPath: String
+    val posterPath: String,
+    val mediaType: MediaType
 )

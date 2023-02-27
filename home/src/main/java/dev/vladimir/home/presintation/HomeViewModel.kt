@@ -6,7 +6,7 @@ import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dev.vladimir.home.domain.MovieInteractor
-import dev.vladimir.home.domain.model.Movie
+import dev.vladimir.home.domain.model.Media
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
@@ -18,8 +18,8 @@ class HomeViewModel @Inject constructor(
 ) : ViewModel() {
 
     private val mutablePopularMoviesState =
-        MutableStateFlow<PagingData<Movie>>(PagingData.empty())
-    val popularMoviesState: StateFlow<PagingData<Movie>> = mutablePopularMoviesState
+        MutableStateFlow<PagingData<Media>>(PagingData.empty())
+    val popularMoviesState: StateFlow<PagingData<Media>> = mutablePopularMoviesState
 
     init {
         getPopularMovies()
