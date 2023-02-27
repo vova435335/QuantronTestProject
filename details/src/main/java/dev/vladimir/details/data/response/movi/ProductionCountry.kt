@@ -1,4 +1,4 @@
-package dev.vladimir.details.data.response
+package dev.vladimir.details.data.response.movi
 
 import com.google.gson.annotations.SerializedName
 

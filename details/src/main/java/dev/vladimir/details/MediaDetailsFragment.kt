@@ -3,14 +3,14 @@ package dev.vladimir.details
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import dev.vladimir.core.presentation.BaseFragment
-import dev.vladimir.details.databinding.FragmentDetailsBinding
+import dev.vladimir.details.databinding.FragmentMediaDetailsBinding
 
-class DetailsFragment : BaseFragment<FragmentDetailsBinding>() {
+class MediaDetailsFragment : BaseFragment<FragmentMediaDetailsBinding>() {
 
     override fun createBinding(
         inflater: LayoutInflater,
         container: ViewGroup?,
-    ): FragmentDetailsBinding {
+    ): FragmentMediaDetailsBinding {
         TODO("Not yet implemented")
     }
 
