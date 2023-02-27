@@ -2,9 +2,12 @@ package dev.vladimir.home.presintation
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.net.toUri
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.NavDeepLinkRequest
+import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.GridLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
@@ -12,6 +15,7 @@ import dev.vladimir.core.data.common.observe
 import dev.vladimir.core.presentation.adapters.DefaultBottomLoadStateAdapter
 import dev.vladimir.home.R
 import dev.vladimir.home.databinding.FragmentHomeBinding
+import dev.vladimir.home.domain.model.MediaType
 
 private const val SPAN_COUNT = 3
 
@@ -20,7 +24,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
     private val viewModel by viewModels<HomeViewModel>()
 
-    private lateinit var popularMovieAdapter: PopularMovieAdapter
+    private lateinit var popularMediaAdapter: PopularMediaAdapter
     private lateinit var popularMovieBottomAdapter: DefaultBottomLoadStateAdapter
 
     private lateinit var binding: FragmentHomeBinding
@@ -37,24 +41,27 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
     private fun observeViewModel() {
         viewModel.popularMoviesState.observe(this) {
-            popularMovieAdapter.submitData(lifecycle, it)
+            popularMediaAdapter.submitData(lifecycle, it)
         }
     }
 
     private fun initRecycler() {
         val layoutManager = GridLayoutManager(requireContext(), SPAN_COUNT)
 
-        popularMovieAdapter = PopularMovieAdapter()
-        popularMovieBottomAdapter = DefaultBottomLoadStateAdapter { popularMovieAdapter.retry() }
+        popularMediaAdapter = PopularMediaAdapter( openDetails = {
+            mediaId, mediaType ->
+            navigateToMediaDetails(mediaId, mediaType) }
+        )
+        popularMovieBottomAdapter = DefaultBottomLoadStateAdapter { popularMediaAdapter.retry() }
 
         binding.homeRv.apply {
             this.layoutManager = layoutManager
-            adapter = popularMovieAdapter.withLoadStateFooter(popularMovieBottomAdapter)
+            adapter = popularMediaAdapter.withLoadStateFooter(popularMovieBottomAdapter)
         }
 
         layoutManager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
             override fun getSpanSize(position: Int): Int {
-                return if (position == popularMovieAdapter.itemCount
+                return if (position == popularMediaAdapter.itemCount
                     && popularMovieBottomAdapter.itemCount > 0
                 ) {
                     SPAN_COUNT
@@ -69,26 +76,36 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
     private fun initSwipeRefresh() {
         binding.homeSrl.setOnRefreshListener {
-            popularMovieAdapter.refresh()
+            popularMediaAdapter.refresh()
         }
     }
 
     private fun listenLoadState() {
-        popularMovieAdapter.addLoadStateListener {
+        popularMediaAdapter.addLoadStateListener {
             with(binding) {
                 val state = it.refresh
                 homeSrl.isRefreshing = state is LoadState.Loading
                 if (state is LoadState.NotLoading) {
-                    homeError.root.isVisible = popularMovieAdapter.itemCount == 0
+                    homeError.root.isVisible = popularMediaAdapter.itemCount == 0
                 }
                 if (state is LoadState.Error) {
-                    homeError.root.isVisible = popularMovieAdapter.itemCount == 0
+                    homeError.root.isVisible = popularMediaAdapter.itemCount == 0
                     homeError.errorTryAgainButton.setOnClickListener {
                         homeSrl.isRefreshing = true
-                        popularMovieAdapter.refresh()
+                        popularMediaAdapter.refresh()
                     }
                 }
             }
         }
+    }
+
+    private fun navigateToMediaDetails(mediaId: String, mediaType: MediaType) {
+        val request = NavDeepLinkRequest.Builder
+            .fromUri(getString(dev.vladimir.core.R.string.navigate_to_media_details)
+                .replace("{media_id}", mediaId)
+                .replace("{media_type}", mediaType.id.toString())
+                .toUri())
+            .build()
+        findNavController().navigate(request)
     }
 }

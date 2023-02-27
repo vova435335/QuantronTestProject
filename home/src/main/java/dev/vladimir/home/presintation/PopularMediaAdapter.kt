@@ -8,18 +8,27 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import dev.vladimir.home.databinding.ItemPopularMovieBinding
 import dev.vladimir.home.domain.model.Media
+import dev.vladimir.home.domain.model.MediaType
 
-class PopularMovieAdapter :
-    PagingDataAdapter<Media, PopularMovieAdapter.Holder>(PopularMoviesDiffUtilCallback()) {
+class PopularMediaAdapter(
+    private val openDetails: (mediaId: String, mediaType: MediaType) -> Unit,
+) :
+    PagingDataAdapter<Media, PopularMediaAdapter.Holder>(PopularMediaDiffUtilCallback()) {
 
     override fun onBindViewHolder(holder: Holder, position: Int) {
-        val movie = getItem(position) ?: return
+        val media = getItem(position) ?: return
 
         with(holder.binding) {
             Glide.with(itemPopularMoviePosterIv)
-                .load(movie.posterPath)
+                .load(media.posterPath)
                 .into(itemPopularMoviePosterIv)
-            itemPopularMovieTitleTv.text = movie.title
+            itemPopularMovieTitleTv.text = media.title
+            itemMediaContainerCv.setOnClickListener {
+                openDetails(
+                    media.id.toString(),
+                    media.mediaType
+                )
+            }
         }
     }
 
@@ -33,7 +42,7 @@ class PopularMovieAdapter :
         RecyclerView.ViewHolder(binding.root)
 }
 
-class PopularMoviesDiffUtilCallback : DiffUtil.ItemCallback<Media>() {
+class PopularMediaDiffUtilCallback : DiffUtil.ItemCallback<Media>() {
 
     override fun areItemsTheSame(oldItem: Media, newItem: Media): Boolean {
         return oldItem.id == newItem.id
