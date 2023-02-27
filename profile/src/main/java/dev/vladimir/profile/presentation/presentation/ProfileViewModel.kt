@@ -22,7 +22,7 @@ class ProfileViewModel @Inject constructor(
 ) : ViewModel() {
 
     private val mutableProfileState =
-        MutableStateFlow<LoadState<Profile>>(LoadState.Loading())
+        MutableStateFlow<LoadState<Profile>>(LoadState.Init())
     val profileState: StateFlow<LoadState<Profile>> = mutableProfileState
 
     private val mutableIsAuthState = MutableSharedFlow<Boolean>()

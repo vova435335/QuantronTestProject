@@ -9,7 +9,7 @@ import dev.vladimir.details.data.MediaDetailsTmdbApi
 import dev.vladimir.details.data.mapper.MovieActorsMapper
 import dev.vladimir.details.data.mapper.MovieDetailsMapper
 import dev.vladimir.details.domain.model.Actor
-import dev.vladimir.details.domain.model.MediaModel
+import dev.vladimir.details.domain.model.MediaDetailsModel
 import dev.vladimir.details.domain.repository.IMediaDetailRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -28,7 +28,7 @@ class MediaDetailsRepository @Inject constructor(
     private val internetConnectionErrorMessage =
         stringProvider.getString(R.string.internet_connection_error_message)
 
-    override suspend fun getMovieDetails(movieId: String): Result<MediaModel> =
+    override suspend fun getMovieDetails(movieId: String): Result<MediaDetailsModel> =
         withContext(Dispatchers.IO) {
             val actors = getActors(movieId)
 

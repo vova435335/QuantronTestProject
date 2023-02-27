@@ -1,9 +1,9 @@
 package dev.vladimir.details.domain.repository
 
 import dev.vladimir.core.data.common.models.Result
-import dev.vladimir.details.domain.model.MediaModel
+import dev.vladimir.details.domain.model.MediaDetailsModel
 
 interface IMediaDetailRepository {
 
-    suspend fun getMovieDetails(movieId: String): Result<MediaModel>
+    suspend fun getMovieDetails(movieId: String): Result<MediaDetailsModel>
 }

@@ -1,9 +1,9 @@
 package dev.vladimir.details.domain.model
 
-data class MediaModel(
+data class MediaDetailsModel(
     val title: String,
     val releaseDate: String,
-    val runtime: Int,
+    val runtime: String,
     val genres: List<String>,
     val posterPath: String,
     val overview: String,

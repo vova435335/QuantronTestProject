@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="media_details_release_date_title">Дата выхода:</string>
+    <string name="media_details_runtime_title">Продолжительность:</string>
+    <string name="media_details_runtime_min">минут</string>
+</resources>
